@@ -14,6 +14,7 @@
             <h3 class="nm-bottom">Pick Survey Templates</h3>
             <p>Users can pick 1 templates to choose from! you can use pick <strong>Multiple Choice Questions</strong>  or <strong>Agree/Disagree Questions</strong>. Forms accessible by clicking the button below.</p>
             <a href="/question/create" class="btn-s1">Add Multiple Choice Question</a> 
+            <a href="/question/create" class="btn-s1">Add Agree/Disagree Question</a> 
             <hr/>
             <h3 class="nm-bottom">Multiple Choice Template</h3>
             <p>You may <strong>Edit</strong> or <strong>Delete</strong> questions from the list below.</p>
@@ -41,7 +42,29 @@
 
 
             </table>
-             
+             <h3 class="nm-bottom">Agree/Disagree Template</h3>
+            <p>You may <strong>Edit</strong> or <strong>Delete</strong> questions from the list below.</p>
+            <table class="table-s1">
+                <tr>
+                    <th>Question</th>
+                    <th>Agree</th>
+                    <th>Neutral</th>
+                    <th>Disagree</th>
+                   
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <% for(var i=0; i < templateData.questions.length; i++) { %>
+                    <tr>
+                      <td><%= templateData.questions[i].question %></td>
+                     <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="far fa-check-square"></i></a></td>
+                      <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="far fa-check-square"></i></a></td>
+                      <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="far fa-check-square"></i></a></td>
+                      <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="fas fa-edit"></i></a></td>
+                      <td><a href="/question/delete/<%= templateData.questions[i].id %>"><i class="fas fa-trash"></i></a></td>
+                    </tr>
+                 <% } %>
+            </table>
         </div>
     </main>
     <footer id="footer">
