@@ -7,7 +7,32 @@
     <header id="header">
         <%- include('../partials/header'); %>
     </header>
-    
+    <main>
+        <div class="inner">
+            <h1><%= templateData.formTitle %></h1>
+            <hr/>
+            <form class="form" method="POST">
+                <fieldset>
+                    <p class="label">Question <strong class="req">*</strong></p>
+                    <input class="textbox" type="text" name="question" value="<%= templateData.question.question %>" placeholder="How's the day today?"/>
+                </fieldset>
+                <fieldset>
+                    <p class="label">Option 1 <strong class="req">*</strong></p>
+                    <input class="textbox" type="text" name="option1" placeholder="Option 1" value="<%= templateData.question.option1 %>" required/>
+                    <p class="label">Option 2 <strong class="req">*</strong></p>
+                    <input class="textbox" type="text" name="option2" placeholder="Option 2" value="<%= templateData.question.option2 %>" required/>
+                    <p class="label">Option 3</p>
+                    <input class="textbox" type="text" name="option3" placeholder="Option 3 (optional)" value="<%= templateData.question.option3 %>"/>
+                    <p class="label">Option 4</p>
+                    <input class="textbox" type="text" name="option4" placeholder="Option 4 (optional)" value="<%= templateData.question.option4 %>"/>
+                </fieldset>
+                <fieldset>
+                    <input class="btn" type="submit" value="<%= templateData.formTitle %>"/>
+                    <a href="/" class="btn">Cancel</a>
+                </fieldset>
+            </form>
+        </div>
+    </main>
     <footer id="footer">
         <%- include('../partials/footer'); %>
     </footer>
