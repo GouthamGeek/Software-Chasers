@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema({
+    type: 'string',
     question: 'string',
+    activation: 'date',
+    expiry: 'date',
     options: 'string'
 });
 

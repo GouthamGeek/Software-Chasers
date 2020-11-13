@@ -5,28 +5,47 @@ var Question = require('../models/Question');
 
 router.get('/', function(req, res) {
 
-    let questionData=[];
+    let mcqQuestionData=[];
+    let opinionQuestionData=[];
     Question.find({}, (err, result)=>{
         console.log(err);
         
         if(result){
             result.forEach((q, index)=>{
                 let options=JSON.parse(q.options);
-                questionData.push({
-                    id: q._id,
-                    question: q.question,
-                    option1: options[0],
-                    option2: options[1],
-                    option3: options[2],
-                    option4: options[3]
-                });
+                
+                console.log(q.type);
+                switch(q.type){
+                    case "mcq":
+                        mcqQuestionData.push({
+                            id: q._id,
+                            question: q.question,
+                            activation: new Date(q.activation).toISOString().split("T")[0],
+                            expiry: new Date(q.expiry).toISOString().split("T")[0],
+                            option1: options[0],
+                            option2: options[1],
+                            option3: options[2],
+                            option4: options[3]
+                        });
+                        break;
+                    
+                    case "opinion":
+                        opinionQuestionData.push({
+                            id: q._id,
+                            question: q.question,
+                            activation: new Date(q.activation).toISOString().split("T")[0],
+                            expiry: new Date(q.expiry).toISOString().split("T")[0]
+                        });
+                        break;
+                }
+                
             });
         }
 
-        console.log(questionData);
         var templateData={
             "pageTitle":"Survey Master",
-            "questions":questionData
+            "mcqQuestionData":mcqQuestionData,
+            "opinionQuestionData":opinionQuestionData
         };
         res.render('pages/index',{templateData:templateData});
     });

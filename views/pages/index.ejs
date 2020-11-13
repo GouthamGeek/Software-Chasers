@@ -12,9 +12,9 @@
             <h1>Survey Management</h1>
             <hr/>
             <h3 class="nm-bottom">Pick Survey Templates</h3>
-            <p>Users can pick 1 templates to choose from! you can use pick <strong>Multiple Choice Questions</strong>  or <strong>Agree/Disagree Questions</strong>. Forms accessible by clicking the button below.</p>
-            <a href="/question/create" class="btn-s1">Add Multiple Choice Question</a> 
-            <a href="/question/create" class="btn-s1">Add Agree/Disagree Question</a> 
+            <p>You can add questions to any of the 2 templates - <strong>Multiple Choice Questions</strong>  or <strong>Agree/Disagree Questions</strong>.</p>
+            <a href="/question/create/mcq" class="btn-s1">Add Multiple Choice Question</a> 
+            <a href="/question/create/opinion" class="btn-s1">Add Agree/Disagree Question</a> 
             <hr/>
             <h3 class="nm-bottom">Multiple Choice Template</h3>
             <p>You may <strong>Edit</strong> or <strong>Delete</strong> questions from the list below.</p>
@@ -25,18 +25,22 @@
                     <th>Option 2</th>
                     <th>Option 3</th>
                     <th>Option 4</th>
+                    <th>Active From</th>
+                    <th>Expires On</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-                <% for(var i=0; i < templateData.questions.length; i++) { %>
+                <% for(var i=0; i < templateData.mcqQuestionData.length; i++) { %>
                     <tr>
-                      <td><%= templateData.questions[i].question %></td>
-                      <td><%= templateData.questions[i].option1 %></td>
-                      <td><%= templateData.questions[i].option2 %></td>
-                      <td><%= templateData.questions[i].option3 %></td>
-                      <td><%= templateData.questions[i].option4 %></td>
-                      <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="fas fa-edit"></i></a></td>
-                      <td><a href="/question/delete/<%= templateData.questions[i].id %>"><i class="fas fa-trash"></i></a></td>
+                      <td><%= templateData.mcqQuestionData[i].question %></td>
+                      <td><%= templateData.mcqQuestionData[i].option1 %></td>
+                      <td><%= templateData.mcqQuestionData[i].option2 %></td>
+                      <td><%= templateData.mcqQuestionData[i].option3 %></td>
+                      <td><%= templateData.mcqQuestionData[i].option4 %></td>
+                      <td><%= templateData.mcqQuestionData[i].activation %></td>
+                      <td><%= templateData.mcqQuestionData[i].expiry %></td>
+                      <td><a href="/question/update/<%= templateData.mcqQuestionData[i].id %>/mcq"><i class="fas fa-edit"></i></a></td>
+                      <td><a href="/question/delete/<%= templateData.mcqQuestionData[i].id %>"><i class="fas fa-trash"></i></a></td>
                     </tr>
                  <% } %>
 
@@ -50,18 +54,21 @@
                     <th>Agree</th>
                     <th>Neutral</th>
                     <th>Disagree</th>
-                   
+                    <th>Active From</th>
+                    <th>Expires On</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-                <% for(var i=0; i < templateData.questions.length; i++) { %>
+                <% for(var i=0; i < templateData.opinionQuestionData.length; i++) { %>
                     <tr>
-                      <td><%= templateData.questions[i].question %></td>
-                     <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="far fa-check-square"></i></a></td>
-                      <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="far fa-check-square"></i></a></td>
-                      <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="far fa-check-square"></i></a></td>
-                      <td><a href="/question/update/<%= templateData.questions[i].id %>"><i class="fas fa-edit"></i></a></td>
-                      <td><a href="/question/delete/<%= templateData.questions[i].id %>"><i class="fas fa-trash"></i></a></td>
+                      <td><%= templateData.opinionQuestionData[i].question %></td>
+                      <td><i class="far fa-check-square"></i></td>
+                      <td><i class="far fa-check-square"></i></td>
+                      <td><i class="far fa-check-square"></i></td>
+                      <td><%= templateData.opinionQuestionData[i].activation %></td>
+                      <td><%= templateData.opinionQuestionData[i].expiry %></td>
+                      <td><a href="/question/update/<%= templateData.opinionQuestionData[i].id %>/opinion"><i class="fas fa-edit"></i></a></td>
+                      <td><a href="/question/delete/<%= templateData.opinionQuestionData[i].id %>"><i class="fas fa-trash"></i></a></td>
                     </tr>
                  <% } %>
             </table>

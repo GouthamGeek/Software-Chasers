@@ -7,16 +7,20 @@ var router = express.Router();
 /**
  * GET ROUTES
  */
-router.get('/create', function(req, res) {
+router.get('/create/:type', function(req, res) {
+    let isMcqType=(req.params.type=="mcq")?true:false;
     var templateData={
         "pageTitle":"Survey Master - Create Question",
         "formTitle":"Add Question",
-        "question":""
+        "question":"",
+        "isMcqType":isMcqType
     };
     res.render('pages/add_question',{templateData:templateData});
 });
 
-router.get('/update/:id', function(req, res) {
+router.get('/update/:id/:type', function(req, res) {
+
+    let isMcqType=(req.params.type=="mcq")?true:false;
 
     Question.findOne({_id:req.params.id}, (err, q)=>{
 
@@ -24,6 +28,8 @@ router.get('/update/:id', function(req, res) {
         let question={
             id: q._id,
             question: q.question,
+            activation: new Date(q.activation).toISOString().split("T")[0],
+            expiry:new Date(q.expiry).toISOString().split("T")[0],
             option1: options[0],
             option2: options[1],
             option3: options[2],
@@ -33,7 +39,8 @@ router.get('/update/:id', function(req, res) {
         var templateData={
             "pageTitle":"Survey Master - Update Question",
             "formTitle":"Edit Question",
-            "question":question
+            "question":question,
+            "isMcqType":isMcqType
         };
     
         res.render('pages/add_question',{templateData:templateData});
@@ -52,8 +59,7 @@ router.get('/delete/:id', function(req, res) {
 /**
  * POST ROUTES
  */
-router.post('/create', function(req, res) {
-    let question=req.body.question;
+router.post('/create/:type', function(req, res) {
     let options=[];
     options.push(req.body.option1);
     options.push(req.body.option2);
@@ -61,7 +67,10 @@ router.post('/create', function(req, res) {
     options.push(req.body.option4);
 
     Question.create({
-        question:question,
+        type:req.params.type,
+        question:req.body.question,
+        activation: req.body.activation,
+        expiry: req.body.expiry,
         options:JSON.stringify(options)
     }, (err, document)=>{
         if(!err)
@@ -70,8 +79,6 @@ router.post('/create', function(req, res) {
 });
 
 router.post('/update/:id', function(req, res) {
-
-    let question=req.body.question;
     let options=[];
     options.push(req.body.option1);
     options.push(req.body.option2);
@@ -81,7 +88,9 @@ router.post('/update/:id', function(req, res) {
     Question.findOneAndUpdate(
         {_id:req.params.id},
         {
-            question:question,
+            question:req.body.question,
+            activation: req.body.activation,
+            expiry: req.body.expiry,
             options:JSON.stringify(options)
         },(err, result)=>{
             res.redirect('/');
