@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+    <header id="header">
+        <%- include('../partials/header'); %>
+    </header>
+    <main>
+        <div class="inner">
+            <h1>Sign In</h1>
+            <hr/>
+            <form class="form" method="POST">
+                <fieldset>
+                    <p class="label">Email <strong class="req">*</strong></p>
+                    <input class="textbox" type="text" name="email" placeholder="john.doe@example.com"/>
+                    <p class="label">Password<strong class="req">*</strong></p>
+                    <input class="textbox" type="password" name="password" placeholder="Your Password"/>
+                </fieldset>
+                <fieldset>
+                    <input class="btn" type="submit" value="Login"/>
+                    <p><%= templateData.statusText %></p>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+    <footer id="footer">
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>
