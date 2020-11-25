@@ -4,7 +4,15 @@
         <p class="text">Software Chasers</p>
     </div>
     <nav class="shadow-center">
+        <a href="/"><i class="fas fa-home"></i>Home</a>
         <a href="/survey/"><i class="fas fa-poll-h"></i>Take Survey</a>
-        <a href="/"><i class="fas fa-home"></i>Survey Management</a>
+        <a href="/survey/manage"><i class="fas fa-home"></i>Survey Management</a>
+        <a href="/user/register"><i class="fas fa-user-plus"></i>Create Account</a>
+        <%if (!templateData.isLoggedIn) { %>
+            <a href="/user/login"><i class="fas fa-sign-in-alt"></i>Sign In</a>
+        <% } else { %>
+            <a href="/user/profile"><i class="fas fa-tasks"></i></i>Manage Profile</a>
+            <a href="/user/logout"><i class="fas fa-sign-in-alt"></i>Logout</a>
+        <% } %>
     </nav>
 </div>
