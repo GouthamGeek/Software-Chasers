@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+    <header id="header">
+        <%- include('../partials/header'); %>
+    </header>
+    <main>
+        <div class="inner">
+            <h1>Manage Profile</h1>
+            <p>Any information changed will be updated.</p>
+            <hr/>
+            <form class="form" method="POST">
+                <fieldset>
+                    <p class="label">Name <strong class="req">*</strong></p>
+                    <input class="textbox" type="text" name="name" placeholder="John Doe" value="<%= templateData.name %>"/>
+                    <p class="label">Email <strong class="req">*</strong></p>
+                    <input class="textbox" type="email" name="email" placeholder="john.doe@example.com" value="<%= templateData.email %>"/>
+                    <p class="label">Current Password <strong class="req">*</strong></p>
+                    <input class="textbox" type="password" name="cpassword" placeholder="Password"/>
+                    <p class="label">New Password (Leave blank if not to be changed)</p>
+                    <input class="textbox" type="password" name="npassword" placeholder="Confirm Password"/>
+                </fieldset>
+                <fieldset>
+                    <input class="btn" type="submit" value="Update Account"/>
+                    <p><%= templateData.statusText %></p>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+    <footer id="footer">
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>

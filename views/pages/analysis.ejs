@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+    <main class="survey-analysis">
+        <h1 class="title">Survey Analysis</h1>
+        <div class="top-con">
+            <a href="/survey/manage" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back to the Website</a>
+            <a id="print-analysis" class="btn"><i class="fas fa-print"></i> Print Analysis Report</a>
+        </div>
+        <hr/>
+
+        <% for(var key in surveyResponses){ %>
+
+            <div class="response">
+                <h3 class="question"><%= key %></h3>
+
+                <% for(var option in surveyResponses[key].options){ %>
+                    <p class="option"><%= option %> - <%= (surveyResponses[key].options[option]/surveyResponses[key].totalCount)*100 %>%</p>
+                    <div class="option-data"><div class="option-percent" style="width:<%= (surveyResponses[key].options[option]/surveyResponses[key].totalCount)*100 %>% !important;"></div></div>
+                <% } %>
+            </div>
+
+        <% } %>
+
+    </main>
+    <script>
+        document.getElementById("print-analysis").addEventListener("click",function(e){
+            e.preventDefault();
+            window.print();
+        });
+    </script>
+</body>
+</html>

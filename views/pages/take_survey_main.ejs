@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+    <header id="header">
+        <%- include('../partials/header'); %>
+    </header>
+    <main id="take-survey" class="main-section">
+        <form id="survey-form" method="POST" action="<%= action %>">
+            <% questions.forEach((question, index1)=>{ %>
+                
+                <div class="question">
+                    <h3 class="q"><%= question.q %></h3>
+
+                    <% if(question.type=="mcq"){ 
+                        question.options.forEach((option, index2)=>{ %>
+                        <div class="option">
+                            <% if(option!="") { %>
+                                <input type="checkbox" value="<%= option %>" name="<%= question.q %>"/>
+                                <label><%= option %></labeL>
+                            <% } %>
+                        </div>
+                    <% }) } %>
+
+                    <% if(question.type=="opinion"){ %>
+                        <div class="option">
+                            <input type="radio" value="agree" name="<%= question.q %>"/>
+                            <label>Agree</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" value="neutral" name="<%= question.q %>"/>
+                            <label>Neutral</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" value="disagree" name="<%= question.q %>"/>
+                            <label>Disagree</label>
+                        </div>
+                    <% } %>
+
+                </div>
+
+            <% }) %>
+            <hr class="divider"/>
+            <input type="submit" class="btn"/>
+        </form>
+    </main>
+    <footer id="footer">
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>

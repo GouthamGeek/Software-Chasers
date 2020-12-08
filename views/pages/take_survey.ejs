@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+    <header id="header">
+        <%- include('../partials/header'); %>
+    </header>
+    <main class="main-section">
+        <h1 class="title">Take Survey</h1>
+        <div class="survey-list">
+        <% surveysAvailable.forEach((survey)=>{ %>
+
+            <a href="<%= survey.route %>"><%= survey.name %></a>
+
+        <% }) %>
+        </div>
+    </main>
+    <footer id="footer">
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>
