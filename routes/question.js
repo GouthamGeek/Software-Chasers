@@ -5,6 +5,16 @@ var Question = require('../models/Question');
 var router = express.Router();
 
 /**
+ * Restrict if not logged in
+ */
+router.get('*', (req, res, next) => {
+    if(!req.session.isLoggedIn)
+        res.redirect("/user/login");
+    else
+        next();
+});
+
+/**
  * GET ROUTES
  */
 router.get('/create/:type', function(req, res) {
@@ -13,7 +23,8 @@ router.get('/create/:type', function(req, res) {
         "pageTitle":"Survey Master - Create Question",
         "formTitle":"Add Question",
         "question":"",
-        "isMcqType":isMcqType
+        "isMcqType":isMcqType,
+        isLoggedIn:req.session.isLoggedIn
     };
     res.render('pages/add_question',{templateData:templateData});
 });
@@ -40,7 +51,8 @@ router.get('/update/:id/:type', function(req, res) {
             "pageTitle":"Survey Master - Update Question",
             "formTitle":"Edit Question",
             "question":question,
-            "isMcqType":isMcqType
+            "isMcqType":isMcqType,
+            isLoggedIn:req.session.isLoggedIn
         };
     
         res.render('pages/add_question',{templateData:templateData});
@@ -52,7 +64,7 @@ router.get('/delete/:id', function(req, res) {
     Question.findOneAndDelete({
         _id:req.params.id
     }, (err, document)=>{   
-        res.redirect('/');
+        res.redirect('/survey/manage');
     });
 });
 
@@ -74,7 +86,7 @@ router.post('/create/:type', function(req, res) {
         options:JSON.stringify(options)
     }, (err, document)=>{
         if(!err)
-            res.redirect('/');
+            res.redirect('/survey/manage');
     });
 });
 
@@ -93,7 +105,7 @@ router.post('/update/:id', function(req, res) {
             expiry: req.body.expiry,
             options:JSON.stringify(options)
         },(err, result)=>{
-            res.redirect('/');
+            res.redirect('/survey/manage');
     });
 });
 
