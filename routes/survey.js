@@ -1,10 +1,22 @@
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 100b6120e9bd0a4c6a7fe4723615a6f5d1f8d956
 const { response } = require('express');
 var express = require('express');
 var router = express.Router();
 var Question = require('../models/Question');
 const sResponse = require('../models/SurveyResponse');
 var surveyResponse = require('../models/SurveyResponse');
+<<<<<<< HEAD
+=======
+=======
+var express = require('express');
+var router = express.Router();
+var Question = require('../models/Question');
+>>>>>>> de2502e324dcbd26da702ac7efa3cd0adc286654
+>>>>>>> 100b6120e9bd0a4c6a7fe4723615a6f5d1f8d956
 
 /**
  * Restrict if not logged in
@@ -17,6 +29,10 @@ var restrict = (req, res, next) => {
 };
 
 router.get('/', (req, res) => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 100b6120e9bd0a4c6a7fe4723615a6f5d1f8d956
 
     var surveysAvailable=[
         {name: "MCQ Survey", route: "/survey/take/mcq"},
@@ -162,6 +178,15 @@ router.get('/take/:type', function(req, res){
         });
 
     });
+<<<<<<< HEAD
+=======
+=======
+    res.render("pages/take_survey",{templateData:{
+        pageTitle:"Take Survey",
+        isLoggedIn:req.session.isLoggedIn
+    }});
+>>>>>>> de2502e324dcbd26da702ac7efa3cd0adc286654
+>>>>>>> 100b6120e9bd0a4c6a7fe4723615a6f5d1f8d956
 });
 
 router.get('/manage', restrict, function(req, res) {
